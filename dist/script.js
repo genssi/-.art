@@ -101,6 +101,84 @@ const modals = () => {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modals);
 
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const slider = (slides, dir, prev, next) => {
+  let slideIndex = 1;
+  let paused = false;
+  const items = document.querySelectorAll(slides);
+  function showSlides(n) {
+    if (n > items.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = items.length;
+    }
+    items.forEach(item => {
+      item.classList.add("animated");
+      item.style.display = "none";
+    });
+    items[slideIndex - 1].style.display = "block";
+  }
+  showSlides(slideIndex); // показываем первый слайд. 
+
+  function plusSlide(n) {
+    showSlides(slideIndex += n);
+  }
+  try {
+    //если на слайдах есть кнопки, сработает этот участок кода.
+    const prevBtn = document.querySelector(prev);
+    const nextBtn = document.querySelector(next);
+    prevBtn.addEventListener("click", () => {
+      plusSlide(-1);
+      items[slideIndex - 1].classList.remove("slideInRight");
+      items[slideIndex - 1].classList.add("slideInLeft");
+    });
+    nextBtn.addEventListener("click", () => {
+      plusSlide(1);
+      items[slideIndex - 1].classList.remove("slideInLeft");
+      items[slideIndex - 1].classList.add("slideInRight");
+    });
+  } catch (e) {}
+  function activateAnimation() {
+    if (dir === "vertical") {
+      // если слайд вертикальный то выполняем этот код.
+      paused = setInterval(() => {
+        //автоматичекская прокрутка слайда.
+        plusSlide(1);
+        items[slideIndex - 1].classList.add("slideInDown");
+      }, 3000);
+    } else {
+      //если слайд не вертикальный то этот.
+      paused = setInterval(() => {
+        //автоматичекская прокрутка слайда.
+        plusSlide(1);
+        items[slideIndex - 1].classList.remove("slideInLeft");
+        items[slideIndex - 1].classList.add("slideInRight");
+      }, 3000);
+    }
+  }
+  activateAnimation(); // запускаем автоматическую прокрутку слайда.
+
+  items[0].parentNode.addEventListener("mouseenter", () => {
+    clearInterval(paused); // если мышка в зоне слайда то слайд останавливается.
+  });
+  items[0].parentNode.addEventListener("mouseleave", () => {
+    activateAnimation(); // если мышка не в зоне слайде то слайд снова работает.
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slider);
+
 /***/ })
 
 /******/ 	});
@@ -165,11 +243,15 @@ var __webpack_exports__ = {};
   \************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+
 
 window.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
-  (0,_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])(); // Запускаем модальные окна
+  (0,_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])(); // Запускаем модальные окна.
+  (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])(".feedback-slider-item", "horizontal", ".main-prev-btn", ".main-next-btn"); //горизонтальный слайдер.
+  (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])(".main-slider-item", "vertical"); //вертикальный сладер.
 });
 /******/ })()
 ;
