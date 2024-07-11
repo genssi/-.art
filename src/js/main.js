@@ -4,6 +4,7 @@ import forms from "./modules/forms";
 import mask from "./modules/mask";
 import checkTextinputs from "./modules/checkTextInputs";
 import showMoreStyles from "./modules/showMoreStyles";
+import calc from "./modules/calc";
 
 window.addEventListener("DOMContentLoaded", () => {
     "use strict";
@@ -16,4 +17,5 @@ window.addEventListener("DOMContentLoaded", () => {
     checkTextinputs("[name='name']"); // валидация для инпута с именем.
     checkTextinputs("[name='message']"); // валидация для инпута с коментарием.
     showMoreStyles(".button-styles", "#styles .row"); // при нажатии на кнопку, показываем скрытые карточки.
+    calc('#size', '#material', '#options', '.promocode', '.calc-price'); // калькулятор для формы.
 });
