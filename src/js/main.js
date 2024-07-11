@@ -3,6 +3,7 @@ import slider from "./modules/slider";
 import forms from "./modules/forms";
 import mask from "./modules/mask";
 import checkTextinputs from "./modules/checkTextInputs";
+import showMoreStyles from "./modules/showMoreStyles";
 
 window.addEventListener("DOMContentLoaded", () => {
     "use strict";
@@ -14,4 +15,5 @@ window.addEventListener("DOMContentLoaded", () => {
     mask("[name='phone']"); // маска для номера телефона.
     checkTextinputs("[name='name']"); // валидация для инпута с именем.
     checkTextinputs("[name='message']"); // валидация для инпута с коментарием.
+    showMoreStyles(".button-styles", "#styles .row"); // при нажатии на кнопку, показываем скрытые карточки.
 });
