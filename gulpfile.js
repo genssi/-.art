@@ -6,8 +6,8 @@ const webpack = require("webpack-stream");
 const browsersync = require("browser-sync");
 
 // Путь к директории, куда будут копироваться файлы после сборки
-// const dist = "./dist/";
-const dist = "/Applications/MAMP/htdocs/picture";
+const dist = "./dist/";
+// const dist = "/Applications/MAMP/htdocs/picture";
 
 // Задача для копирования HTML-файла
 gulp.task("copy-html", () => {

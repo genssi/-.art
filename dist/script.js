@@ -2,6 +2,286 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/calc.js":
+/*!********************************!*\
+  !*** ./src/js/modules/calc.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const calc = (size, material, options, promocode, result) => {
+  const sizeBlock = document.querySelector(size);
+  const materialBlock = document.querySelector(material);
+  const optionsblock = document.querySelector(options);
+  const promocodeBlock = document.querySelector(promocode);
+  const resultBlock = document.querySelector(result);
+  let sum = 0;
+  const calcfFunc = () => {
+    sum = Math.round(+sizeBlock.value * +materialBlock.value + +optionsblock.value);
+    if (sizeBlock.value == "" || materialBlock.value == "") {
+      resultBlock.textContent = "Пожалуйста, выберите размер и материал картины!";
+    } else if (promocodeBlock.value == "IWANTPOPART") {
+      resultBlock.textContent = Math.round(sum * 0.7);
+    } else {
+      resultBlock.textContent = sum;
+    }
+  };
+  sizeBlock.addEventListener("change", calcfFunc);
+  materialBlock.addEventListener("change", calcfFunc);
+  optionsblock.addEventListener("change", calcfFunc);
+  promocodeBlock.addEventListener("input", calcfFunc);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calc);
+
+/***/ }),
+
+/***/ "./src/js/modules/checkTextInputs.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/checkTextInputs.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const checkTextinputs = selector => {
+  const textInputs = document.querySelectorAll(selector);
+  textInputs.forEach(input => {
+    input.addEventListener("keypress", function (e) {
+      if (e.key.match(/[^а-яё 0-9]/ig)) {
+        e.preventDefault();
+      }
+    });
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (checkTextinputs);
+
+/***/ }),
+
+/***/ "./src/js/modules/filter.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/filter.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const filter = () => {
+  const menu = document.querySelector(".portfolio-menu");
+  const items = menu.querySelectorAll("li");
+  const btnAll = menu.querySelector(".all");
+  const btnLovers = menu.querySelector(".lovers");
+  const btnChef = menu.querySelector(".chef");
+  const btnGirl = menu.querySelector(".girl");
+  const btnGuy = menu.querySelector(".guy");
+  const btnGrandmother = menu.querySelector(".grandmother");
+  const btnGranddad = menu.querySelector(".granddad");
+  const wrapper = document.querySelector(".portfolio-wrapper");
+  const markAll = wrapper.querySelectorAll(".all");
+  const markGirl = wrapper.querySelectorAll(".girl");
+  const markLovers = wrapper.querySelectorAll(".lovers");
+  const markChef = wrapper.querySelectorAll(".chef");
+  const markGuy = wrapper.querySelectorAll(".guy");
+  const no = document.querySelector(".portfolio-no");
+  const typeFilter = markType => {
+    markAll.forEach(mark => {
+      mark.style.display = "none";
+      mark.classList.remove("animated", "fadeIn");
+    });
+    no.style.display = "none";
+    no.classList.remove('animated', 'fadeIn');
+    if (markType) {
+      markType.forEach(mark => {
+        mark.style.display = "block";
+        mark.classList.add("animated", "fadeIn");
+      });
+    } else {
+      no.style.display = "block";
+      no.classList.add("animated", "fadeIn");
+    }
+  };
+  btnAll.addEventListener("click", () => {
+    typeFilter(markAll);
+  });
+  btnLovers.addEventListener("click", () => {
+    typeFilter(markLovers);
+  });
+  btnChef.addEventListener("click", () => {
+    typeFilter(markChef);
+  });
+  btnGirl.addEventListener("click", () => {
+    typeFilter(markGirl);
+  });
+  btnGuy.addEventListener("click", () => {
+    typeFilter(markGuy);
+  });
+  btnGrandmother.addEventListener("click", () => {
+    typeFilter();
+  });
+  btnGranddad.addEventListener("click", () => {
+    typeFilter();
+  });
+  menu.addEventListener("click", e => {
+    let target = e.target;
+    if (target && target.tagName == "LI") {
+      items.forEach(btn => btn.classList.remove("active"));
+      target.classList.add("active");
+    }
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (filter);
+
+/***/ }),
+
+/***/ "./src/js/modules/forms.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/forms.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _services_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/request */ "./src/js/services/request.js");
+
+const forms = () => {
+  const form = document.querySelectorAll('form'),
+    inputs = document.querySelectorAll('input'),
+    upload = document.querySelectorAll('[name="upload"]');
+  const message = {
+    loading: 'Загрузка...',
+    success: 'Спасибо! Скоро мы с вами свяжемся',
+    failure: 'Что-то пошло не так...',
+    spinner: 'assets/img/spinner.gif',
+    ok: 'assets/img/ok.png',
+    fail: 'assets/img/fail.png'
+  };
+  const path = {
+    designer: 'assets/server.php',
+    question: 'assets/question.php'
+  };
+  const clearInputs = () => {
+    inputs.forEach(item => {
+      item.value = '';
+    });
+    upload.forEach(item => {
+      item.previousElementSibling.textContent = "Файл не выбран";
+    });
+  };
+  upload.forEach(item => {
+    item.addEventListener('input', () => {
+      console.log(item.files[0]);
+      let dots;
+      const arr = item.files[0].name.split('.');
+      arr[0].length > 6 ? dots = "..." : dots = '.';
+      const name = arr[0].substring(0, 6) + dots + arr[1];
+      item.previousElementSibling.textContent = name;
+    });
+  });
+  form.forEach(item => {
+    item.addEventListener('submit', e => {
+      e.preventDefault();
+      let statusMessage = document.createElement('div');
+      statusMessage.classList.add('status');
+      item.parentNode.appendChild(statusMessage);
+      item.classList.add('animated', 'fadeOutUp');
+      setTimeout(() => {
+        item.style.display = 'none';
+      }, 400);
+      let statusImg = document.createElement('img');
+      statusImg.setAttribute('src', message.spinner);
+      statusImg.classList.add('animated', 'fadeInUp');
+      statusMessage.appendChild(statusImg);
+      let textMessage = document.createElement('div');
+      textMessage.textContent = message.loading;
+      statusMessage.appendChild(textMessage);
+      const formData = new FormData(item);
+      let api;
+      item.closest('.popup-design') || item.classList.contains('calc_form') ? api = path.designer : api = path.question;
+      console.log(api);
+      (0,_services_request__WEBPACK_IMPORTED_MODULE_0__.postData)(api, formData).then(res => {
+        console.log(res);
+        statusImg.setAttribute('src', message.ok);
+        textMessage.textContent = message.success;
+      }).catch(() => {
+        statusImg.setAttribute('src', message.fail);
+        textMessage.textContent = message.failure;
+      }).finally(() => {
+        clearInputs();
+        setTimeout(() => {
+          statusMessage.remove();
+          item.style.display = 'block';
+          item.classList.remove('fadeOutUp');
+          item.classList.add('fadeInUp');
+        }, 5000);
+      });
+    });
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (forms);
+
+/***/ }),
+
+/***/ "./src/js/modules/mask.js":
+/*!********************************!*\
+  !*** ./src/js/modules/mask.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const mask = selector => {
+  let setCursorPosition = (pos, elem) => {
+    elem.focus();
+    if (elem.setSelectionRange) {
+      elem.setSelectionRange(pos, pos);
+    } else if (elem.createTextRange) {
+      let range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
+  };
+  function createMask(event) {
+    let matrix = "+7 (___) ___ __ __";
+    let i = 0;
+    let def = matrix.replace(/\D/g, "");
+    let val = this.value.replace(/\D/g, "");
+    if (def.length >= val.length) {
+      val = def;
+    }
+    this.value = matrix.replace(/./g, function (a) {
+      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a;
+    });
+    if (event.type === "blur") {
+      if (this.value.length == 2) {
+        this.value = "";
+      }
+    } else {
+      setCursorPosition(this.value.length, this);
+    }
+  }
+  let inputs = document.querySelectorAll(selector);
+  inputs.forEach(input => {
+    input.addEventListener("input", createMask);
+    input.addEventListener("focus", createMask);
+    input.addEventListener("blur", createMask);
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mask);
+
+/***/ }),
+
 /***/ "./src/js/modules/modals.js":
 /*!**********************************!*\
   !*** ./src/js/modules/modals.js ***!
@@ -103,6 +383,58 @@ const modals = () => {
 
 /***/ }),
 
+/***/ "./src/js/modules/showMoreStyles.js":
+/*!******************************************!*\
+  !*** ./src/js/modules/showMoreStyles.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _services_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/request */ "./src/js/services/request.js");
+
+const showMoreStyles = (trigger, wrapper) => {
+  const btn = document.querySelector(trigger);
+
+  // cards.forEach(card => { // ( это 1 вариант) полчуение карточка из верстки.
+  //     card.classList.add("animated", "fadeInUp");
+  // });
+
+  // btn.addEventListener("click", () => {
+  //     cards.forEach(card => {
+  //         card.classList.remove("hidden-lg", "hidden-md", "hidden-sm", "hidden-xs");
+  //         card.classList.add("col-sm-3", "col-sm-offset-0", "col-xs-10", "col-xs-offset-1");
+  //     });
+
+  //     btn.remove();
+  // });
+
+  btn.addEventListener("click", function () {
+    // ( это 2 вариант) получение карточек из сервера.
+    (0,_services_request__WEBPACK_IMPORTED_MODULE_0__.getResource)("assets/db.json").then(res => creaeteCards(res.styles)).catch(error => console.log(error));
+    this.remove(); // удаляем кнопку "показать еще".
+  });
+  function creaeteCards(response) {
+    response.forEach(item => {
+      let card = document.createElement("div");
+      card.classList.add("animated", "fadeInUp", "col-sm-3", "col-sm-offset-0", "col-xs-10", "col-xs-offset-1");
+      card.innerHTML = `
+                 <div class=styles-block>
+                    <img src=${item.src} alt="style">
+                    <h4>${item.title}</h4>
+                    <a href="${item.link}">Подробнее</a>
+                </div>
+            `;
+      document.querySelector(wrapper).appendChild(card);
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showMoreStyles);
+
+/***/ }),
+
 /***/ "./src/js/modules/slider.js":
 /*!**********************************!*\
   !*** ./src/js/modules/slider.js ***!
@@ -179,6 +511,37 @@ const slider = (slides, dir, prev, next) => {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slider);
 
+/***/ }),
+
+/***/ "./src/js/services/request.js":
+/*!************************************!*\
+  !*** ./src/js/services/request.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getResource: () => (/* binding */ getResource),
+/* harmony export */   postData: () => (/* binding */ postData)
+/* harmony export */ });
+const postData = async (url, data) => {
+  //отправка данных на сервер.
+  let res = await fetch(url, {
+    method: "POST",
+    body: data
+  });
+  return await res.text();
+};
+const getResource = async url => {
+  // получение данных с сервера.
+  let res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+  }
+  return await res.json();
+};
+
+
 /***/ })
 
 /******/ 	});
@@ -244,6 +607,18 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
+/* harmony import */ var _modules_mask__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mask */ "./src/js/modules/mask.js");
+/* harmony import */ var _modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/checkTextInputs */ "./src/js/modules/checkTextInputs.js");
+/* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
+/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
+
+
+
+
+
+
 
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -251,7 +626,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_0__["default"])(); // Запускаем модальные окна.
   (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])(".feedback-slider-item", "horizontal", ".main-prev-btn", ".main-next-btn"); //горизонтальный слайдер.
-  (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])(".main-slider-item", "vertical"); //вертикальный сладер.
+  (0,_modules_slider__WEBPACK_IMPORTED_MODULE_1__["default"])(".main-slider-item", "vertical"); //вертикальный слайдер.
+  (0,_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])(); // Запускаем формы обратной связи.
+  (0,_modules_mask__WEBPACK_IMPORTED_MODULE_3__["default"])("[name='phone']"); // маска для номера телефона.
+  (0,_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])("[name='name']"); // валидация для инпута с именем.
+  (0,_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])("[name='message']"); // валидация для инпута с коментарием.
+  (0,_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])(".button-styles", "#styles .row"); // при нажатии на кнопку, показываем скрытые карточки.
+  (0,_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price'); // калькулятор для формы.
+  (0,_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])(); // фильтрация портретов.
 });
 /******/ })()
 ;
