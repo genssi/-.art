@@ -6,6 +6,7 @@ import checkTextinputs from "./modules/checkTextInputs";
 import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
 import filter from "./modules/filter";
+import pictureSize from "./modules/pictureSize";
 
 window.addEventListener("DOMContentLoaded", () => {
     "use strict";
@@ -20,4 +21,5 @@ window.addEventListener("DOMContentLoaded", () => {
     showMoreStyles(".button-styles", "#styles .row"); // при нажатии на кнопку, показываем скрытые карточки.
     calc('#size', '#material', '#options', '.promocode', '.calc-price'); // калькулятор для формы.
     filter(); // фильтрация портретов.
+    pictureSize(".sizes-block"); // показывает изображения на блоках при наведении мышью на определенный блок.
 });
