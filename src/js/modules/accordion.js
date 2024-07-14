@@ -12,12 +12,6 @@ const accordion = (triggersSelector) => {
                 this.nextElementSibling.style.maxHeight = "0px";
             }
         });
-
-        window.addEventListener("resize", () => {
-            if (window.screen.availWidth > 992) {
-                menuElem.style.display = "none";
-            }
-        });
     });
 };
 

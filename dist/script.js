@@ -24,11 +24,6 @@ const accordion = triggersSelector => {
         this.nextElementSibling.style.maxHeight = "0px";
       }
     });
-    window.addEventListener("resize", () => {
-      if (window.screen.availWidth > 992) {
-        menuElem.style.display = "none";
-      }
-    });
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordion);
@@ -54,6 +49,11 @@ const burger = (menuSelector, burgerSelector) => {
       //если размер экрана < 993px
       menuElem.style.display = "block";
     } else {
+      menuElem.style.display = "none";
+    }
+  });
+  window.screen.addEventListener("resize", () => {
+    if (window.screen.availWidth > 992) {
       menuElem.style.display = "none";
     }
   });
