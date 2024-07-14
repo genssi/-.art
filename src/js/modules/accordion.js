@@ -12,9 +12,13 @@ const accordion = (triggersSelector) => {
                 this.nextElementSibling.style.maxHeight = "0px";
             }
         });
+
+        window.addEventListener("resize", () => {
+            if (window.screen.availWidth > 992) {
+                menuElem.style.display = "none";
+            }
+        });
     });
 };
 
 export default accordion;
-
-// ДЗ сделать так что бы при клике открывался только один блок на котором произошел клик, а все остальные закрывались или скрывались.
