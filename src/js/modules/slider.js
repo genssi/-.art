@@ -51,8 +51,8 @@ const slider = (slides, dir, prev, next) => {
         } else { //если слайд не вертикальный то этот.
             paused = setInterval(() => { //автоматичекская прокрутка слайда.
                 plusSlide(1);
-                items[slideIndex - 1].classList.remove("slideInLeft");
-                items[slideIndex - 1].classList.add("slideInRight");
+                items[slideIndex - 1].classList.remove("slideInRight");
+                items[slideIndex - 1].classList.add("slideInLeft");
             }, 3000);
         }
     }

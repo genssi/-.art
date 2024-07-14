@@ -2,6 +2,36 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const accordion = triggersSelector => {
+  const btns = document.querySelectorAll(triggersSelector);
+  btns.forEach(btn => {
+    btn.addEventListener("click", function () {
+      this.classList.toggle("active-style");
+      this.nextElementSibling.classList.toggle("active-content");
+      if (this.classList.contains("active-style")) {
+        this.nextElementSibling.style.maxHeight = this.nextElementSibling.scrollHeight + 80 + "px";
+      } else {
+        this.nextElementSibling.style.maxHeight = "0px";
+      }
+    });
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (accordion);
+
+// ДЗ сделать так что бы при клике открывался только один блок на котором произошел клик, а все остальные закрывались или скрывались.
+
+/***/ }),
+
 /***/ "./src/js/modules/calc.js":
 /*!********************************!*\
   !*** ./src/js/modules/calc.js ***!
@@ -536,8 +566,8 @@ const slider = (slides, dir, prev, next) => {
       paused = setInterval(() => {
         //автоматичекская прокрутка слайда.
         plusSlide(1);
-        items[slideIndex - 1].classList.remove("slideInLeft");
-        items[slideIndex - 1].classList.add("slideInRight");
+        items[slideIndex - 1].classList.remove("slideInRight");
+        items[slideIndex - 1].classList.add("slideInLeft");
       }, 3000);
     }
   }
@@ -655,6 +685,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
 /* harmony import */ var _modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/pictureSize */ "./src/js/modules/pictureSize.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
 
 
 
@@ -678,6 +710,7 @@ window.addEventListener("DOMContentLoaded", () => {
   (0,_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price'); // калькулятор для формы.
   (0,_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])(); // фильтрация портретов.
   (0,_modules_pictureSize__WEBPACK_IMPORTED_MODULE_8__["default"])(".sizes-block"); // показывает изображения на блоках при наведении мышью на определенный блок.
+  (0,_modules_accordion__WEBPACK_IMPORTED_MODULE_9__["default"])(".accordion-heading");
 });
 /******/ })()
 ;

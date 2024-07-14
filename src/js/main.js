@@ -7,6 +7,7 @@ import showMoreStyles from "./modules/showMoreStyles";
 import calc from "./modules/calc";
 import filter from "./modules/filter";
 import pictureSize from "./modules/pictureSize";
+import accordion from "./modules/accordion";
 
 window.addEventListener("DOMContentLoaded", () => {
     "use strict";
@@ -22,4 +23,5 @@ window.addEventListener("DOMContentLoaded", () => {
     calc('#size', '#material', '#options', '.promocode', '.calc-price'); // калькулятор для формы.
     filter(); // фильтрация портретов.
     pictureSize(".sizes-block"); // показывает изображения на блоках при наведении мышью на определенный блок.
+    accordion(".accordion-heading"); // аккардион (секция с вопросами пользователя).
 });
