@@ -7,7 +7,7 @@ const browsersync = require("browser-sync");
 
 // Путь к директории, куда будут копироваться файлы после сборки
 const dist = "./dist/";
-// const dist = "/Applications/MAMP/htdocs/picture";
+// const dist = "/Applications/MAMP/htdocs/picture"; // адрес к нашему серверу
 
 // Задача для копирования HTML-файла
 gulp.task("copy-html", () => {
